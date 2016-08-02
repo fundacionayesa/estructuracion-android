@@ -26,6 +26,7 @@
          Aquí podremos crear nuestro componente Dagger singleton (ApplicationComponent)-->
 
     <application
+        android:name=".TVShowsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="TV Shows FA"
