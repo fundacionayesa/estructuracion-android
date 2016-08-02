@@ -1,3 +1,4 @@
+
 /*
  *  Copyright (c) 2016. Fundación Ayesa
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,23 +15,29 @@
  *
  *  @author Juan Aguilar
  */
-package org.fundacionayesa.campusfa.di.component;
+package org.fundacionayesa.campusfa.model.dto;
 
-import org.fundacionayesa.campusfa.di.module.ApplicationModule;
-import org.fundacionayesa.campusfa.di.module.NetModule;
+import org.fundacionayesa.campusfa.model.vo.TVShow;
 
-import javax.inject.Singleton;
+import java.util.List;
 
-import dagger.Component;
-import retrofit2.Retrofit;
+public class TVShowDTO {
+    int page;
+    List<TVShow> results;
 
-/**
- * Componente Dagger de tipo singleton (habrá uno solamente para todas las activities de la aplicación)
- * <p/>
- * que proveerá de elementos comunes independientes al ciclo de vida de las activities.
- */
-@Singleton
-@Component(modules = {ApplicationModule.class,NetModule.class})
-public interface ApplicationComponent {
-    Retrofit retrofit();
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public List<TVShow> getResults() {
+        return results;
+    }
+
+    public void setResults(List<TVShow> results) {
+        this.results = results;
+    }
 }
