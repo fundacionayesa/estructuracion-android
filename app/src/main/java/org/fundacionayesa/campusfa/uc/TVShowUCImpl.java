@@ -20,8 +20,11 @@ import android.util.Log;
 
 import org.fundacionayesa.campusfa.api.ShowsApi;
 import org.fundacionayesa.campusfa.model.dto.TVShowDTO;
+import org.fundacionayesa.campusfa.model.event.DetailTVShowReceivedErrorEvent;
+import org.fundacionayesa.campusfa.model.event.DetailTVShowReceivedEvent;
 import org.fundacionayesa.campusfa.model.event.ShowListReceivedErrorEvent;
 import org.fundacionayesa.campusfa.model.event.ShowListReceivedEvent;
+import org.fundacionayesa.campusfa.model.vo.DetailTVShow;
 import org.greenrobot.eventbus.EventBus;
 
 import retrofit2.Call;
@@ -52,6 +55,24 @@ public class TVShowUCImpl implements TVShowUC {
             @Override
             public void onFailure(Call<TVShowDTO> call, Throwable t) {
                 bus.post(new ShowListReceivedErrorEvent());
+            }
+        });
+    }
+
+    @Override
+    public void getDetailTVShow(long tvShowId) {
+        showsApi.getTVShowDetails(tvShowId).enqueue(new Callback<DetailTVShow>() {
+            @Override
+            public void onResponse(Call<DetailTVShow> call, Response<DetailTVShow> response) {
+                if (response.isSuccessful())
+                    bus.post(new DetailTVShowReceivedEvent(response.body()));
+                else
+                    bus.post(new DetailTVShowReceivedErrorEvent());
+            }
+
+            @Override
+            public void onFailure(Call<DetailTVShow> call, Throwable t) {
+                bus.post(new DetailTVShowReceivedErrorEvent());
             }
         });
     }

@@ -105,4 +105,27 @@
         <item name="android:paddingTop">?android:attr/actionBarSize</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+
+    <style name="AppTheme.AppBarOverlay.CollapsingToolbarLayout">
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="contentScrim">?attr/colorPrimary</item>
+    </style>
+
+    <!-- Estilo de la imagen que aparece en la ActionBar de la vista de detalle-->
+    <style name="AppTheme.AppBarOverlay.Image">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="layout_collapseMode">parallax</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="layout_collapseMode">pin</item>
+    </style>
+
 </resources>

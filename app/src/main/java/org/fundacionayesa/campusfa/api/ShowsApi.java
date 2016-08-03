@@ -17,9 +17,11 @@
 package org.fundacionayesa.campusfa.api;
 
 import org.fundacionayesa.campusfa.model.dto.TVShowDTO;
+import org.fundacionayesa.campusfa.model.vo.DetailTVShow;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
  * Interfaz para la implementación de Retrofit.
@@ -32,4 +34,8 @@ public interface ShowsApi {
 
     @GET("tv/popular")
     Call<TVShowDTO> getLatestTVShows();
+
+    @GET("tv/{show_id}")
+    Call<DetailTVShow> getTVShowDetails(@Path("show_id") long tvShowId);
+
 }
