@@ -72,6 +72,7 @@ public class ShowListActivity extends BaseActivity implements ShowListPresenter.
     public void onPostComponentCreated() {
 
         //Inicialización de la vista del presenter.
+        getComponent().inject((ShowListPresenterImpl) this.presenter);
         this.presenter.setView(this);
     }
 
@@ -83,12 +84,10 @@ public class ShowListActivity extends BaseActivity implements ShowListPresenter.
         //Zona de inicialización
         initializeToolbar();
         initializeRecycler();
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        this.presenter.init();
+        if(savedInstanceState == null)
+            this.presenter.init();
+
     }
 
     private void initializeToolbar() {
@@ -110,5 +109,29 @@ public class ShowListActivity extends BaseActivity implements ShowListPresenter.
     @Override
     public void showLoading(boolean visible) {
         loading.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    private final String LIST_STATE_KEY = "LIST_STATE_KEY";
+
+    /**
+     * Guardamos la lista para recuperarla al terminar la rotación.
+     * Así ahorramos una petición por cada rotación de la pantalla.
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(LIST_STATE_KEY, (ArrayList) presenter.getTVShows());
+    }
+
+    /**
+     * Recuperamos la lista y se la pasamos al presenter.
+     */
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            ArrayList<TVShow> tvShows = (ArrayList<TVShow>) savedInstanceState.getSerializable(LIST_STATE_KEY);
+            this.presenter.restorePresenterWithSavedStatus(tvShows);
+        }
     }
 }

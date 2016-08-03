@@ -18,6 +18,7 @@ package org.fundacionayesa.campusfa.presenter;
 
 import org.fundacionayesa.campusfa.model.vo.TVShow;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ShowListPresenter {
@@ -34,6 +35,22 @@ public interface ShowListPresenter {
      * @param view
      */
     void setView(View view);
+
+
+    /**
+     * @return Listado de TVShows para mostrar
+     */
+    List<TVShow> getTVShows();
+
+
+    /**
+     * Método para restablecer el estado del presenter.
+     * Como decisión de diseño, tenemos el listado de TVShows en el presenter.
+     * Podríamos tenerlo en la activity, pero el presenter es mucho más adecuado,
+     * entre otras cosas, por razones de testeabilidad.
+     * @param tvShows
+     */
+    void restorePresenterWithSavedStatus(ArrayList<TVShow> tvShows);
 
 
     /**
