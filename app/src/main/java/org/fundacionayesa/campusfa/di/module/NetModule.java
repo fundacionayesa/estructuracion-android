@@ -16,10 +16,21 @@
  */
 package org.fundacionayesa.campusfa.di.module;
 
+import org.fundacionayesa.campusfa.api.ShowsApi;
+
+import javax.inject.Singleton;
+
 import dagger.Module;
+import dagger.Provides;
+import retrofit2.Retrofit;
 
 
 @Module(includes = {ApplicationModule.class})
 public final class NetModule {
+    @Singleton
+    @Provides
+    ShowsApi provideShowsApi(Retrofit retrofit) {
+        return retrofit.create(ShowsApi.class);
+    }
 
 }
