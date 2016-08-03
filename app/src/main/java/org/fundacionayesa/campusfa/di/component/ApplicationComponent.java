@@ -19,6 +19,7 @@ package org.fundacionayesa.campusfa.di.component;
 import org.fundacionayesa.campusfa.api.ShowsApi;
 import org.fundacionayesa.campusfa.di.module.ApplicationModule;
 import org.fundacionayesa.campusfa.di.module.NetModule;
+import org.fundacionayesa.campusfa.utils.Navigator;
 import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Singleton;
@@ -39,5 +40,7 @@ public interface ApplicationComponent {
     ShowsApi showsApi();
 
     EventBus eventBus();
+
+    Navigator navigator();
 
 }

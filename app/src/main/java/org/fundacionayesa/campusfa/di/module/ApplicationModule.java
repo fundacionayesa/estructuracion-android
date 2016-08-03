@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.fundacionayesa.campusfa.config.APIConfig;
+import org.fundacionayesa.campusfa.utils.Navigator;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
@@ -60,6 +61,12 @@ public class ApplicationModule {
     @Singleton
     public EventBus eventBus() {
         return new EventBus();
+    }
+
+    @Provides
+    @Singleton
+    public Navigator provideNavigator() {
+        return new Navigator();
     }
 
     @Provides

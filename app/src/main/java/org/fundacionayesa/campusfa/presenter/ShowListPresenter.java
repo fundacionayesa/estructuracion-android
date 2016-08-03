@@ -17,11 +17,12 @@
 package org.fundacionayesa.campusfa.presenter;
 
 import org.fundacionayesa.campusfa.model.vo.TVShow;
+import org.fundacionayesa.campusfa.view.listener.TVShowClickedListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public interface ShowListPresenter {
+public interface ShowListPresenter extends TVShowClickedListener{
 
     /**
      * Método que se ejecuta para iniciar el presenter

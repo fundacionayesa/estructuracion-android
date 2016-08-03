@@ -16,11 +16,14 @@
  */
 package org.fundacionayesa.campusfa.presenter;
 
+import android.content.Context;
+
 import org.fundacionayesa.campusfa.model.event.ShowListReceivedErrorEvent;
 import org.fundacionayesa.campusfa.model.event.ShowListReceivedEvent;
 import org.fundacionayesa.campusfa.model.vo.TVShow;
 import org.fundacionayesa.campusfa.uc.TVShowUC;
-import org.fundacionayesa.campusfa.utils.MockFactory;
+import org.fundacionayesa.campusfa.utils.Navigator;
+import org.fundacionayesa.campusfa.view.listener.TVShowClickedListener;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -29,7 +32,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class ShowListPresenterImpl implements ShowListPresenter {
+public class ShowListPresenterImpl implements ShowListPresenter, TVShowClickedListener {
 
     /**
      * Vista que maneja el presenter.
@@ -48,6 +51,16 @@ public class ShowListPresenterImpl implements ShowListPresenter {
 
     @Inject
     EventBus bus;
+
+    @Inject
+    Navigator navigator;
+
+    /**
+     * Contexto inyectado, del tipo Activity
+     */
+    @Inject
+    Context context;
+
 
     /**
      * Método que se ejecutará siempre que alguien ponga en el bus un evento
@@ -75,6 +88,7 @@ public class ShowListPresenterImpl implements ShowListPresenter {
         view.showLoading(false);
     }
 
+
     @Override
     public void init() {
         view.showLoading(true);
@@ -92,6 +106,7 @@ public class ShowListPresenterImpl implements ShowListPresenter {
         return this.tvShows;
     }
 
+
     @Override
     public void onStart() {
         //Registramos la instancia presenter en el bus para que pueda
@@ -108,8 +123,15 @@ public class ShowListPresenterImpl implements ShowListPresenter {
 
     @Override
     public void restorePresenterWithSavedStatus(ArrayList<TVShow> tvShows) {
-        if(tvShows!=null){
-        this.tvShows = tvShows;
-        view.populateTVShows(this.tvShows);}
+        if (this.tvShows != null) {
+            this.tvShows = tvShows;
+            view.populateTVShows(this.tvShows);
+        }
+    }
+
+    @Override
+    public void tvShowClicked(TVShow tvShow) {
+        //Mostramos la activity de detalle.
+        navigator.goTVShowDetail(context, tvShow.getId());
     }
 }

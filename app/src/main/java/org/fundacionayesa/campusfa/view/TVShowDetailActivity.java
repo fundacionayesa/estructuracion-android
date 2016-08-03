@@ -37,6 +37,7 @@ import org.fundacionayesa.campusfa.di.component.ActivityComponent;
 import org.fundacionayesa.campusfa.model.vo.DetailTVShow;
 import org.fundacionayesa.campusfa.presenter.TVShowDetailActivityPresenter;
 import org.fundacionayesa.campusfa.presenter.TVShowDetailActivityPresenterImpl;
+import org.fundacionayesa.campusfa.utils.Navigator;
 
 import javax.inject.Inject;
 
@@ -100,7 +101,7 @@ public class TVShowDetailActivity extends BaseActivity implements TVShowDetailAc
         if (savedInstanceState == null) {
             //El id será pasado por Bundle cuando lleguemos a esta activity, y dependerá
             //del TVShow pulsado.
-            long tvShowId = getIntent().getExtras().getLong("TV_SHOW_DETAIL_KEY");
+            long tvShowId = getIntent().getExtras().getLong(Navigator.TV_SHOW_DETAIL_KEY);
             presenter.init(tvShowId);
         }
     }
