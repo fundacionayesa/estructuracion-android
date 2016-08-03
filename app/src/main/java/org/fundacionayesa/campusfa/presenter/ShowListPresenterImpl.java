@@ -16,9 +16,13 @@
  */
 package org.fundacionayesa.campusfa.presenter;
 
+import org.fundacionayesa.campusfa.model.event.ShowListReceivedErrorEvent;
+import org.fundacionayesa.campusfa.model.event.ShowListReceivedEvent;
 import org.fundacionayesa.campusfa.model.vo.TVShow;
 import org.fundacionayesa.campusfa.uc.TVShowUC;
 import org.fundacionayesa.campusfa.utils.MockFactory;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +46,35 @@ public class ShowListPresenterImpl implements ShowListPresenter {
     @Inject
     TVShowUC tvShowUC;
 
+    @Inject
+    EventBus bus;
+
+    /**
+     * Método que se ejecutará siempre que alguien ponga en el bus un evento
+     * de tipo ShowListReceivedEvent y el presenter se encuentre registrado en el bus.
+     *
+     * @param event
+     */
+    @Subscribe
+    public void onTVShowsReceived(ShowListReceivedEvent event) {
+        this.tvShows = event.getShows();
+        view.populateTVShows(this.tvShows);
+        view.showLoading(false);
+    }
+
+    /**
+     * Método que se ejecutará siempre que alguien ponga en el bus un evento
+     * de tipo ShowListReceivedErrorEvent y el presenter se encuentre registrado en el bus.
+     *
+     * @param event
+     */
+
+    @Subscribe
+    public void onTVShowsReceivedError(ShowListReceivedErrorEvent event) {
+        view.showErrorGettingShows();
+        view.showLoading(false);
+    }
+
     @Override
     public void init() {
         view.showLoading(true);
@@ -57,6 +90,20 @@ public class ShowListPresenterImpl implements ShowListPresenter {
     @Override
     public List<TVShow> getTVShows() {
         return this.tvShows;
+    }
+
+    @Override
+    public void onStart() {
+        //Registramos la instancia presenter en el bus para que pueda
+        //escuchar los eventos
+        bus.register(this);
+    }
+
+    @Override
+    public void onStop() {
+        //Como el presenter se ha parado, ya no queremos que siga escuchando
+        //eventos para evitar efectos no deseados, y lo borramos del registro.
+        bus.unregister(this);
     }
 
     @Override

@@ -46,4 +46,7 @@ dependencies {
     //Retrofit (peticiones http)
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+
+    //EventBus (comunicación entre capas MVP mediante el lanzamiento de eventos)
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

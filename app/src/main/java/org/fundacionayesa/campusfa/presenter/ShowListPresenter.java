@@ -42,6 +42,17 @@ public interface ShowListPresenter {
      */
     List<TVShow> getTVShows();
 
+    /**
+     * Método que ejecutaremos en el onStart de la activity para adaptar el presenter
+     * su ciclo de vida
+     */
+    void onStart();
+
+    /**
+     * Método que ejecutaremos en el onStop de la activity para adaptar el presenter
+     * su ciclo de vida
+     */
+    void onStop();
 
     /**
      * Método para restablecer el estado del presenter.
@@ -62,5 +73,7 @@ public interface ShowListPresenter {
         void populateTVShows(List<TVShow> tvShows);
 
         void showLoading(boolean visible);
+
+        void showErrorGettingShows();
     }
 }

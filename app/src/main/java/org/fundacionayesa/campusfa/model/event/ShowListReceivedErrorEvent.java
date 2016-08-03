@@ -14,25 +14,8 @@
  *
  *  @author Juan Aguilar
  */
-package org.fundacionayesa.campusfa.di.module;
+package org.fundacionayesa.campusfa.model.event;
 
-import org.fundacionayesa.campusfa.api.ShowsApi;
-import org.fundacionayesa.campusfa.di.scope.ActivityContext;
-import org.fundacionayesa.campusfa.uc.TVShowUC;
-import org.fundacionayesa.campusfa.uc.TVShowUCImpl;
-import org.greenrobot.eventbus.EventBus;
-
-import dagger.Module;
-import dagger.Provides;
-
-
-@Module(includes = {ActivityModule.class})
-public final class UseCaseModule {
-
-    @ActivityContext
-    @Provides
-    TVShowUC provideTVShowUC(EventBus eventBus, ShowsApi showsApi) {
-        return new TVShowUCImpl(eventBus,showsApi);
-    }
+public class ShowListReceivedErrorEvent {
 
 }

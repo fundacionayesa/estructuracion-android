@@ -20,6 +20,9 @@ import android.util.Log;
 
 import org.fundacionayesa.campusfa.api.ShowsApi;
 import org.fundacionayesa.campusfa.model.dto.TVShowDTO;
+import org.fundacionayesa.campusfa.model.event.ShowListReceivedErrorEvent;
+import org.fundacionayesa.campusfa.model.event.ShowListReceivedEvent;
+import org.greenrobot.eventbus.EventBus;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,9 +31,11 @@ import retrofit2.Response;
 public class TVShowUCImpl implements TVShowUC {
 
     private ShowsApi showsApi;
+    private EventBus bus;
 
-    public TVShowUCImpl(ShowsApi showsApi) {
+    public TVShowUCImpl(EventBus bus, ShowsApi showsApi) {
         this.showsApi = showsApi;
+        this.bus = bus;
     }
 
     @Override
@@ -39,14 +44,14 @@ public class TVShowUCImpl implements TVShowUC {
             @Override
             public void onResponse(Call<TVShowDTO> call, Response<TVShowDTO> response) {
                 if (response.isSuccessful())
-                    Log.d("TVShows received", response.body().getResults().toString());
+                    bus.post(new ShowListReceivedEvent(response.body().getResults()));
                 else
-                    Log.e("TVShows error: ", String.valueOf(response.code()));
+                    bus.post(new ShowListReceivedErrorEvent());
             }
 
             @Override
             public void onFailure(Call<TVShowDTO> call, Throwable t) {
-                Log.e("TVShows error: ", t.getMessage());
+                bus.post(new ShowListReceivedErrorEvent());
             }
         });
     }
