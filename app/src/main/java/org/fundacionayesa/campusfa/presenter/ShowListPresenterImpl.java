@@ -123,7 +123,7 @@ public class ShowListPresenterImpl implements ShowListPresenter, TVShowClickedLi
 
     @Override
     public void restorePresenterWithSavedStatus(ArrayList<TVShow> tvShows) {
-        if (this.tvShows != null) {
+        if (tvShows != null) {
             this.tvShows = tvShows;
             view.populateTVShows(this.tvShows);
         }
