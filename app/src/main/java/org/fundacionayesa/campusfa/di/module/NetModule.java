@@ -14,23 +14,12 @@
  *
  *  @author Juan Aguilar
  */
-package org.fundacionayesa.campusfa.di.component;
+package org.fundacionayesa.campusfa.di.module;
 
-import org.fundacionayesa.campusfa.di.module.ApplicationModule;
-import org.fundacionayesa.campusfa.di.module.NetModule;
+import dagger.Module;
 
-import javax.inject.Singleton;
 
-import dagger.Component;
-import retrofit2.Retrofit;
+@Module(includes = {ApplicationModule.class})
+public final class NetModule {
 
-/**
- * Componente Dagger de tipo singleton (habrá uno solamente para todas las activities de la aplicación)
- * <p/>
- * que proveerá de elementos comunes independientes al ciclo de vida de las activities.
- */
-@Singleton
-@Component(modules = {ApplicationModule.class,NetModule.class})
-public interface ApplicationComponent {
-    Retrofit retrofit();
 }
