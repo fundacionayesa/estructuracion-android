@@ -16,6 +16,7 @@
  */
 package org.fundacionayesa.campusfa.di.component;
 
+import org.fundacionayesa.campusfa.api.ShowsApi;
 import org.fundacionayesa.campusfa.di.module.ApplicationModule;
 import org.fundacionayesa.campusfa.di.module.NetModule;
 
@@ -33,4 +34,6 @@ import retrofit2.Retrofit;
 @Component(modules = {ApplicationModule.class,NetModule.class})
 public interface ApplicationComponent {
     Retrofit retrofit();
+
+    ShowsApi showsApi();
 }

@@ -14,24 +14,22 @@
  *
  *  @author Juan Aguilar
  */
-package org.fundacionayesa.campusfa.di.module;
+package org.fundacionayesa.campusfa.api;
 
-import org.fundacionayesa.campusfa.api.ShowsApi;
-import org.fundacionayesa.campusfa.di.scope.ActivityContext;
-import org.fundacionayesa.campusfa.uc.TVShowUC;
-import org.fundacionayesa.campusfa.uc.TVShowUCImpl;
+import org.fundacionayesa.campusfa.model.dto.TVShowDTO;
 
-import dagger.Module;
-import dagger.Provides;
+import retrofit2.Call;
+import retrofit2.http.GET;
 
+/**
+ * Interfaz para la implementación de Retrofit.
+ * <p>
+ * Ej: Al llamar al método getLatestTVShows, se ejecutará una petición
+ * de tipo GET, al endpoint BASE_URL+"tv/popular.
+ */
 
-@Module(includes = {ActivityModule.class})
-public final class UseCaseModule {
+public interface ShowsApi {
 
-    @ActivityContext
-    @Provides
-    TVShowUC provideTVShowUC(ShowsApi showsApi) {
-        return new TVShowUCImpl(showsApi);
-    }
-
+    @GET("tv/popular")
+    Call<TVShowDTO> getLatestTVShows();
 }

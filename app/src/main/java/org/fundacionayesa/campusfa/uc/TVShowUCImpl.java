@@ -14,24 +14,20 @@
  *
  *  @author Juan Aguilar
  */
-package org.fundacionayesa.campusfa.di.module;
+package org.fundacionayesa.campusfa.uc;
 
 import org.fundacionayesa.campusfa.api.ShowsApi;
-import org.fundacionayesa.campusfa.di.scope.ActivityContext;
-import org.fundacionayesa.campusfa.uc.TVShowUC;
-import org.fundacionayesa.campusfa.uc.TVShowUCImpl;
 
-import dagger.Module;
-import dagger.Provides;
+public class TVShowUCImpl implements TVShowUC {
 
+    private ShowsApi showsApi;
 
-@Module(includes = {ActivityModule.class})
-public final class UseCaseModule {
-
-    @ActivityContext
-    @Provides
-    TVShowUC provideTVShowUC(ShowsApi showsApi) {
-        return new TVShowUCImpl(showsApi);
+    public TVShowUCImpl(ShowsApi showsApi) {
+        this.showsApi = showsApi;
     }
 
+    @Override
+    public void getLatestTVShows() {
+        //TODO: lo implementaremos en el siguiente tema
+    }
 }

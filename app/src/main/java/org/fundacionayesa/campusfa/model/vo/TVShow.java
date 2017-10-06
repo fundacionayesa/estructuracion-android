@@ -17,6 +17,8 @@
 package org.fundacionayesa.campusfa.model.vo;
 
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class TVShow implements Serializable {
@@ -24,8 +26,10 @@ public class TVShow implements Serializable {
 
     private long id;
 
+    @SerializedName("name")
     private String name;
 
+    @SerializedName("poster_path")
     private String featuredImage;
 
     public TVShow() {

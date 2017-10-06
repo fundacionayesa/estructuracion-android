@@ -14,24 +14,17 @@
  *
  *  @author Juan Aguilar
  */
-package org.fundacionayesa.campusfa.di.module;
+package org.fundacionayesa.campusfa.uc;
 
-import org.fundacionayesa.campusfa.api.ShowsApi;
-import org.fundacionayesa.campusfa.di.scope.ActivityContext;
-import org.fundacionayesa.campusfa.uc.TVShowUC;
-import org.fundacionayesa.campusfa.uc.TVShowUCImpl;
-
-import dagger.Module;
-import dagger.Provides;
-
-
-@Module(includes = {ActivityModule.class})
-public final class UseCaseModule {
-
-    @ActivityContext
-    @Provides
-    TVShowUC provideTVShowUC(ShowsApi showsApi) {
-        return new TVShowUCImpl(showsApi);
-    }
-
+public interface TVShowUC {
+    /**
+     * Caso de uso: Obtener los TVShows más populares
+     * <p>
+     * La implementación de este método encapsulará toda la lógica de negocio
+     * necesaria para obtener los TVShows más populares.
+     * <p>
+     * Hará la petición al servidor, procesará la respuesta y colocará en el bus
+     * el evento que se comunicará con el presenter.
+     */
+    void getLatestTVShows();
 }
