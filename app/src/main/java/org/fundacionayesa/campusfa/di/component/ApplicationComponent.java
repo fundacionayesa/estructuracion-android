@@ -19,6 +19,7 @@ package org.fundacionayesa.campusfa.di.component;
 import org.fundacionayesa.campusfa.api.ShowsApi;
 import org.fundacionayesa.campusfa.di.module.ApplicationModule;
 import org.fundacionayesa.campusfa.di.module.NetModule;
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Singleton;
 
@@ -36,4 +37,7 @@ public interface ApplicationComponent {
     Retrofit retrofit();
 
     ShowsApi showsApi();
+
+    EventBus eventBus();
+
 }

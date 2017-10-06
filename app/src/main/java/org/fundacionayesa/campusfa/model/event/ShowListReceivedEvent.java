@@ -14,25 +14,25 @@
  *
  *  @author Juan Aguilar
  */
-package org.fundacionayesa.campusfa.di.module;
+package org.fundacionayesa.campusfa.model.event;
 
-import org.fundacionayesa.campusfa.api.ShowsApi;
-import org.fundacionayesa.campusfa.di.scope.ActivityContext;
-import org.fundacionayesa.campusfa.uc.TVShowUC;
-import org.fundacionayesa.campusfa.uc.TVShowUCImpl;
-import org.greenrobot.eventbus.EventBus;
+import org.fundacionayesa.campusfa.model.vo.TVShow;
 
-import dagger.Module;
-import dagger.Provides;
+import java.util.List;
 
+public class ShowListReceivedEvent {
 
-@Module(includes = {ActivityModule.class})
-public final class UseCaseModule {
+    private List<TVShow> shows;
 
-    @ActivityContext
-    @Provides
-    TVShowUC provideTVShowUC(EventBus eventBus, ShowsApi showsApi) {
-        return new TVShowUCImpl(eventBus,showsApi);
+    public ShowListReceivedEvent(List<TVShow> shows) {
+        this.shows = shows;
     }
 
+    public List<TVShow> getShows() {
+        return shows;
+    }
+
+    public void setShows(List<TVShow> shows) {
+        this.shows = shows;
+    }
 }

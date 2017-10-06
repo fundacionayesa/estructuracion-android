@@ -90,6 +90,18 @@ public class ShowListActivity extends BaseActivity implements ShowListPresenter.
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.presenter.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        this.presenter.onStop();
+    }
+
     private void initializeToolbar() {
         this.toolbarView.setTitle("");
         setSupportActionBar(toolbarView);
@@ -109,6 +121,11 @@ public class ShowListActivity extends BaseActivity implements ShowListPresenter.
     @Override
     public void showLoading(boolean visible) {
         loading.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showErrorGettingShows() {
+        Toast.makeText(this, getString(R.string.error_getting_shows), Toast.LENGTH_SHORT).show();
     }
 
     private final String LIST_STATE_KEY = "LIST_STATE_KEY";

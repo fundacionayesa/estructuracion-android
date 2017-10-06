@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.fundacionayesa.campusfa.R;
+import org.fundacionayesa.campusfa.config.APIConfig;
 import org.fundacionayesa.campusfa.model.vo.TVShow;
 
 import java.util.List;
@@ -61,7 +62,7 @@ public class ShowListAdapter extends RecyclerView.Adapter<TVShowViewHolder> {
 
         //Utilizamos Picasso para cargar la imagen en la ImageView a partir de la URL.
         //Recomendamos encarecidamente el uso de esta librería puesto que contiene automatización de cachés, placeholders etc.
-        Picasso.with(context).load(currentTVShow.getFeaturedImage()).fit().centerInside().into(holder.imageView);
+        Picasso.with(context).load(APIConfig.BASE_IMAGE_URL + currentTVShow.getFeaturedImage()).fit().centerInside().into(holder.imageView);
     }
 
     @Override
