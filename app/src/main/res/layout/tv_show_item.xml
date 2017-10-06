@@ -16,23 +16,17 @@
   ~  @author Juan Aguilar
   -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="@dimen/item_movie_height"
+    android:clipChildren="false">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/tv_shows"
-        style="@style/AppTheme.RecyclerView" />
+    <ImageView
+        android:id="@+id/tv_show_image"
+        style="@style/AppTheme.ImageView.TVShowItem" />
 
-    <ProgressBar
-        android:id="@+id/loading"
-        style="@style/AppTheme.ProgressBar" />
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tv_shows_toolbar"
-        style="@style/AppTheme.Toolbar">
-
-        <TextView style="@style/AppTheme.TextView.Title" />
-    </android.support.v7.widget.Toolbar>
+    <TextView
+        android:id="@+id/tv_show_name"
+        style="@style/AppTheme.TextView.TVShowItem" />
 
 </FrameLayout>
