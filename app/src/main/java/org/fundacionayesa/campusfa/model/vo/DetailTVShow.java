@@ -14,20 +14,27 @@
  *
  *  @author Juan Aguilar
  */
+package org.fundacionayesa.campusfa.model.vo;
 
-package org.fundacionayesa.campusfa.config;
+public class DetailTVShow extends TVShow {
+    private String homepage;
 
-public interface APIConfig {
-    //API Key que tenemos que añadir en cada petición para identificarnos en el servicio
-    String API_KEY ="d7f97b07c16cda5293eb7ab97dec92a4";
+    private String overview;
 
-    //URL base para las peticiones al servicio
-    String API_HOST = "http://api.themoviedb.org/3/";
+    public String getHomepage() {
+        return homepage;
+    }
 
-    //Por URL base donde van las imágenes que nos provee la API.
-    //String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185";
+    public void setHomepage(String homepage) {
+        this.homepage = homepage;
+    }
 
-    //Cambiamos la URL para obtener imágenes más grandes.
-    String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
 
 }

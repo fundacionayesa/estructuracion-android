@@ -20,7 +20,9 @@ import org.fundacionayesa.campusfa.di.module.ActivityModule;
 import org.fundacionayesa.campusfa.di.module.UseCaseModule;
 import org.fundacionayesa.campusfa.di.scope.ActivityContext;
 import org.fundacionayesa.campusfa.presenter.ShowListPresenterImpl;
+import org.fundacionayesa.campusfa.presenter.TVShowDetailActivityPresenterImpl;
 import org.fundacionayesa.campusfa.view.ShowListActivity;
+import org.fundacionayesa.campusfa.view.TVShowDetailActivity;
 
 import dagger.Component;
 
@@ -49,4 +51,8 @@ public interface ActivityComponent {
     void inject(ShowListActivity showListActivity);
 
     void inject(ShowListPresenterImpl presenter);
+
+    void inject(TVShowDetailActivity tvShowDetailActivity);
+
+    void inject(TVShowDetailActivityPresenterImpl presenter);
 }

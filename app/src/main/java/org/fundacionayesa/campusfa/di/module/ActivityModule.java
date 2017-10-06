@@ -22,6 +22,8 @@ import android.content.Context;
 import org.fundacionayesa.campusfa.di.scope.ActivityContext;
 import org.fundacionayesa.campusfa.presenter.ShowListPresenter;
 import org.fundacionayesa.campusfa.presenter.ShowListPresenterImpl;
+import org.fundacionayesa.campusfa.presenter.TVShowDetailActivityPresenter;
+import org.fundacionayesa.campusfa.presenter.TVShowDetailActivityPresenterImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -79,5 +81,22 @@ public final class ActivityModule {
     @Provides
     ShowListPresenter provideShowListPresenter() {
         return new ShowListPresenterImpl();
+    }
+
+    /**
+     * Permite inyectar una instancia nueva de TVShowDetailActivityPresenter.
+     * En este caso, la implementación es de TVShowDetailActivityPresenterImpl
+     *
+     * Ej.
+     *
+     * @Inject
+     * TVShowDetailActivityPresenter presenter;
+     *
+     * @return Nueva instancia de TVShowDetailActivityPresenter
+     */
+    @ActivityContext
+    @Provides
+    TVShowDetailActivityPresenter provideTVShowDetailActivityPresenter() {
+        return new TVShowDetailActivityPresenterImpl();
     }
 }

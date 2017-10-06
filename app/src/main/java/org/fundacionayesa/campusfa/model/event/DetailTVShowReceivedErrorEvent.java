@@ -14,20 +14,8 @@
  *
  *  @author Juan Aguilar
  */
+package org.fundacionayesa.campusfa.model.event;
 
-package org.fundacionayesa.campusfa.config;
-
-public interface APIConfig {
-    //API Key que tenemos que añadir en cada petición para identificarnos en el servicio
-    String API_KEY ="d7f97b07c16cda5293eb7ab97dec92a4";
-
-    //URL base para las peticiones al servicio
-    String API_HOST = "http://api.themoviedb.org/3/";
-
-    //Por URL base donde van las imágenes que nos provee la API.
-    //String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185";
-
-    //Cambiamos la URL para obtener imágenes más grandes.
-    String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+public class DetailTVShowReceivedErrorEvent {
 
 }

@@ -27,4 +27,15 @@ public interface TVShowUC {
      * el evento que se comunicará con el presenter.
      */
     void getLatestTVShows();
+
+    /**
+     * Caso de uso: Obtener un TVShow a partir de su id
+     *
+     * La implementación de este método encapsulará toda la lógica de negocio
+     * necesaria para obtener un TVShow dado su id.
+     *
+     * Hará la petición al servidor, procesará la respuesta y colocará en el bus
+     * el evento que se comunicará con el presenter.
+     */
+    void getDetailTVShow(long tvShowId);
 }
