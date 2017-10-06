@@ -16,7 +16,14 @@
  */
 package org.fundacionayesa.campusfa.uc;
 
+import android.util.Log;
+
 import org.fundacionayesa.campusfa.api.ShowsApi;
+import org.fundacionayesa.campusfa.model.dto.TVShowDTO;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TVShowUCImpl implements TVShowUC {
 
@@ -28,6 +35,19 @@ public class TVShowUCImpl implements TVShowUC {
 
     @Override
     public void getLatestTVShows() {
-        //TODO: lo implementaremos en el siguiente tema
+        showsApi.getLatestTVShows().enqueue(new Callback<TVShowDTO>() {
+            @Override
+            public void onResponse(Call<TVShowDTO> call, Response<TVShowDTO> response) {
+                if (response.isSuccessful())
+                    Log.d("TVShows received", response.body().getResults().toString());
+                else
+                    Log.e("TVShows error: ", String.valueOf(response.code()));
+            }
+
+            @Override
+            public void onFailure(Call<TVShowDTO> call, Throwable t) {
+                Log.e("TVShows error: ", t.getMessage());
+            }
+        });
     }
 }

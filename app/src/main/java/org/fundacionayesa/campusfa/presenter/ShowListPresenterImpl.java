@@ -17,10 +17,13 @@
 package org.fundacionayesa.campusfa.presenter;
 
 import org.fundacionayesa.campusfa.model.vo.TVShow;
+import org.fundacionayesa.campusfa.uc.TVShowUC;
 import org.fundacionayesa.campusfa.utils.MockFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class ShowListPresenterImpl implements ShowListPresenter {
 
@@ -36,17 +39,30 @@ public class ShowListPresenterImpl implements ShowListPresenter {
      */
     private List<TVShow> tvShows;
 
+    @Inject
+    TVShowUC tvShowUC;
+
     @Override
     public void init() {
         view.showLoading(true);
-        this.tvShows = MockFactory.getMockedTVShows();
-        view.populateTVShows(this.tvShows);
-        view.showLoading(false);
+        tvShowUC.getLatestTVShows();
     }
 
     @Override
     public void setView(View view) {
         //Inicializamos la vista al crear una instancia del presenter
         this.view = view;
+    }
+
+    @Override
+    public List<TVShow> getTVShows() {
+        return this.tvShows;
+    }
+
+    @Override
+    public void restorePresenterWithSavedStatus(ArrayList<TVShow> tvShows) {
+        if(tvShows!=null){
+        this.tvShows = tvShows;
+        view.populateTVShows(this.tvShows);}
     }
 }

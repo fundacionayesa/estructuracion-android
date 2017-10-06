@@ -19,6 +19,7 @@ package org.fundacionayesa.campusfa.di.component;
 import org.fundacionayesa.campusfa.di.module.ActivityModule;
 import org.fundacionayesa.campusfa.di.module.UseCaseModule;
 import org.fundacionayesa.campusfa.di.scope.ActivityContext;
+import org.fundacionayesa.campusfa.presenter.ShowListPresenterImpl;
 import org.fundacionayesa.campusfa.view.ShowListActivity;
 
 import dagger.Component;
@@ -43,7 +44,9 @@ import dagger.Component;
  */
 
 @ActivityContext
-@Component(dependencies = {ApplicationComponent.class}, modules = {ActivityModule.class,UseCaseModule.class})
+@Component(dependencies = {ApplicationComponent.class}, modules = {ActivityModule.class, UseCaseModule.class})
 public interface ActivityComponent {
     void inject(ShowListActivity showListActivity);
+
+    void inject(ShowListPresenterImpl presenter);
 }
