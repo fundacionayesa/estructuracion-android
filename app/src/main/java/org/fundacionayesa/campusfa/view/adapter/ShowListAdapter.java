@@ -30,6 +30,7 @@ import com.squareup.picasso.Picasso;
 import org.fundacionayesa.campusfa.R;
 import org.fundacionayesa.campusfa.config.APIConfig;
 import org.fundacionayesa.campusfa.model.vo.TVShow;
+import org.fundacionayesa.campusfa.view.listener.TVShowClickedListener;
 
 import java.util.List;
 
@@ -37,10 +38,12 @@ public class ShowListAdapter extends RecyclerView.Adapter<TVShowViewHolder> {
 
     private Context context;
     private List<TVShow> tvShows;
+    private TVShowClickedListener listener;
 
-    public ShowListAdapter(Context context, List<TVShow> tvShows) {
+    public ShowListAdapter(Context context, List<TVShow> tvShows, TVShowClickedListener listener) {
         this.context = context;
         this.tvShows = tvShows;
+        this.listener = listener;
     }
 
     @Override
@@ -63,6 +66,15 @@ public class ShowListAdapter extends RecyclerView.Adapter<TVShowViewHolder> {
         //Utilizamos Picasso para cargar la imagen en la ImageView a partir de la URL.
         //Recomendamos encarecidamente el uso de esta librería puesto que contiene automatización de cachés, placeholders etc.
         Picasso.with(context).load(APIConfig.BASE_IMAGE_URL + currentTVShow.getFeaturedImage()).fit().centerInside().into(holder.imageView);
+
+        //Listener para capturar el evento onClick y notificarlo al presenter
+        //El evento será capturado cuando se pulse el contenedor externo de las vistas para mejor UX.
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.tvShowClicked(currentTVShow);
+            }
+        });
     }
 
     @Override

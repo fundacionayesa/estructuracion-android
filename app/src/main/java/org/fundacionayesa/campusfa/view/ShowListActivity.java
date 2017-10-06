@@ -115,7 +115,7 @@ public class ShowListActivity extends BaseActivity implements ShowListPresenter.
 
     @Override
     public void populateTVShows(List<TVShow> tvShows) {
-        this.tvShowsView.setAdapter(new ShowListAdapter(this, tvShows));
+        this.tvShowsView.setAdapter(new ShowListAdapter(this, tvShows, presenter));
     }
 
     @Override
