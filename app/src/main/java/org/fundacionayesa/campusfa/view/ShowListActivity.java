@@ -17,26 +17,31 @@
 package org.fundacionayesa.campusfa.view;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import org.fundacionayesa.campusfa.R;
+import org.fundacionayesa.campusfa.di.component.ActivityComponent;
 import org.fundacionayesa.campusfa.model.vo.TVShow;
 import org.fundacionayesa.campusfa.presenter.ShowListPresenter;
 import org.fundacionayesa.campusfa.presenter.ShowListPresenterImpl;
 import org.fundacionayesa.campusfa.utils.RecyclerInsetsDecoration;
 import org.fundacionayesa.campusfa.view.adapter.ShowListAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import javax.inject.Inject;
 
-public class ShowListActivity extends AppCompatActivity implements ShowListPresenter.View {
+import butterknife.BindView;
+
+public class ShowListActivity extends BaseActivity implements ShowListPresenter.View {
+
 
     //Binding de las variables presentes en el layout XML.
     //Para ello hemos utilizado ButterKnife, para evitar código "boilerplate"
@@ -48,28 +53,43 @@ public class ShowListActivity extends AppCompatActivity implements ShowListPrese
     @BindView(R.id.loading)
     ProgressBar loading;
 
-    private ShowListPresenter presenter;
+    /**
+     * Inyectamos nuestro presenter con Dagger.
+     */
+    @Inject
+    ShowListPresenter presenter;
+
+
+    @Override
+    public void onComponentCreated(@NonNull final ActivityComponent component) {
+        super.onComponentCreated(component);
+
+        //Registramos esta activity para poder realizar inyecciones
+        component.inject(this);
+    }
+
+    @Override
+    public void onPostComponentCreated() {
+
+        //Inicialización de la vista del presenter.
+        this.presenter.setView(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_list_layout);
-        //Requerimiento de ButterKnife para ejecutar el binding
-        ButterKnife.bind(this);
+        super.init(R.layout.show_list_layout);
 
         //Zona de inicialización
         initializeToolbar();
         initializeRecycler();
-        this.presenter = new ShowListPresenterImpl();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        this.presenter.setView(this);
         this.presenter.init();
     }
-
 
     private void initializeToolbar() {
         this.toolbarView.setTitle("");
